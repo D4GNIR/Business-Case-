@@ -1,0 +1,8 @@
+parameters:
+  streetArray: [Rue,boulevard,Route,Chemin,Avenue,Place,Impasse]
+
+App\Entity\Address:
+  address{1..125}:
+    streetNumber: '<numberBetween(1,1000)>'
+    streetName: '<randomElement($streetArray)> <lastName()>'  
+    city: '@city*'

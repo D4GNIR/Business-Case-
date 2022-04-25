@@ -1,0 +1,142 @@
+App\Entity\Category:
+  category0:
+    label: 'Chiens'
+  category1:
+    label: 'Chats'
+  category2:
+    label: 'Reptiles'
+  category3:
+    label: 'Rongeurs'
+  category4:
+    label: 'Oiseaux'
+  category5:
+    label: 'Poissons'
+  category6:
+    label: 'Basse-cour'
+#Alimentation 
+  category7:
+    label: 'Alimentation Chiens'
+    categoryParent: '@category0'
+  category8:
+    label: 'Alimentation Chats'
+    categoryParent: '@category1'
+  category9:
+    label: 'Alimentation Reptiles'
+    categoryParent: '@category2'
+  category10:
+    label: 'Alimentation Rongeurs'
+    categoryParent: '@category3'
+  category11:
+    label: 'Alimentation Oiseaux'
+    categoryParent: '@category4'
+  category12:
+    label: 'Alimentation Poissons'
+    categoryParent: '@category5'
+  category13:
+    label: 'Alimentation Basse-cour'
+    categoryParent: '@category6'
+# Hygiene
+  category14:
+    label: 'Hygiène et soins Chiens'
+    categoryParent: '@category0'
+  category15:
+    label: 'Hygiène et soins Chats'
+    categoryParent: '@category1'
+  category16:
+    label: 'Hygiène et soins Reptiles'
+    categoryParent: '@category2'
+  category17:
+    label: 'Hygiène et soins Rongeurs'
+    categoryParent: '@category3'
+  category18:
+    label: 'Hygiène et soinsOiseaux'
+    categoryParent: '@category4'
+  category19:
+    label: 'Hygiène et soins Poissons'
+    categoryParent: '@category5'
+  category20:
+    label: 'Hygiène et soins Basse-cour'
+    categoryParent: '@category6'
+#Accessoires 
+  category21:
+    label: 'Accessoires Chiens'
+    categoryParent: '@category0'
+  category22:
+    label: 'Accessoires Chats'
+    categoryParent: '@category1'
+  category23:
+    label: 'Accessoires Reptiles'
+    categoryParent: '@category2'
+  category24:
+    label: 'Accessoires Rongeurs'
+    categoryParent: '@category3'
+  category25:
+    label: 'Accessoires Oiseaux'
+    categoryParent: '@category4'
+  category26:
+    label: 'Accessoires Poissons'
+    categoryParent: '@category5'
+  category27:
+    label: 'Accessoires Basse-cour'
+    categoryParent: '@category6'
+#Jouet 
+  category28:
+    label: 'Jouet Chiens'
+    categoryParent: '@category21'
+  category29:
+    label: 'Jouet Chats'
+    categoryParent: '@category22'
+  category30:
+    label: 'Jouet Reptiles'
+    categoryParent: '@category23'
+  category31:
+    label: 'Jouet Rongeurs'
+    categoryParent: '@category24'
+  category32:
+    label: 'Jouet Oiseaux'
+    categoryParent: '@category25'
+#Habitat 
+  category33:
+    label: 'Paniers et coussins Chiens'
+    categoryParent: '@category21'
+  category34:
+    label: 'Coussins et arbres à Chats'
+    categoryParent: '@category22'
+  category35:
+    label: 'Terrariums Reptiles'
+    categoryParent: '@category23'
+  category36:
+    label: 'Cages Rongeurs'
+    categoryParent: '@category24'
+  category37:
+    label: 'Cages Oiseaux'
+    categoryParent: '@category25'
+  category38:
+    label: 'Aquariums Poissons'
+    categoryParent: '@category26'
+  category39:
+    label: 'Poulaillers Basse-cour'
+    categoryParent: '@category27'
+#Divers 
+  category40:
+    label: 'Accessoires Divers Chiens'
+    categoryParent: '@category21'
+  category41:
+    label: 'Accessoires Divers Chats'
+    categoryParent: '@category22'
+  category42:
+    label: 'Accessoires Divers Reptiles'
+    categoryParent: '@category23'
+  category43:
+    label: 'Accessoires Divers Rongeurs'
+    categoryParent: '@category24'
+  category44:
+    label: 'Accessoires Divers Oiseaux'
+    categoryParent: '@category25'
+  category45:
+    label: 'Accessoires Divers Poissons'
+    categoryParent: '@category26'
+  category46:
+    label: 'Accessoires Divers Basse-cour'
+    categoryParent: '@category27'
+

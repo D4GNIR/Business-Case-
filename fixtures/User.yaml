@@ -1,0 +1,24 @@
+parameters:
+  genderArray: [M,F,O]
+
+App\Entity\User:
+  user{0}:
+    email: 'admin@admin.com'
+    roles: ["ROLE_ADMIN"]
+    #root
+    password: "\\$2y\\$13\\$TXnzqHUzxIcajTYoYlXjoOaeJy7no5ni21Ue2rzrF3C92KnDWqVCe"
+    firstName: 'Emmanuel'  
+    lastName: 'Macron' 
+    gender: 'O'  
+    dob: '<date_create()>'
+    adresses: '<numberBetween(1,5)>x @address*'
+  user{1..150}:
+    email: '<email()>'
+    roles: ["ROLE_USER"]
+    #root
+    password: "\\$2y\\$13\\$TXnzqHUzxIcajTYoYlXjoOaeJy7no5ni21Ue2rzrF3C92KnDWqVCe"
+    firstName: '<firstName()>'  
+    lastName: '<lastName()>' 
+    gender: '<randomElement($genderArray)>'  
+    dob: '<dateTimeBetween("-29120 days","-5460 days")>'
+    adresses: '<numberBetween(1,5)>x @address*'

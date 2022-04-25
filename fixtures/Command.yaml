@@ -1,0 +1,12 @@
+parameters:
+  statusArray: [100,200,300,400]
+
+App\Entity\Command:
+  Command{0..150}:
+    numCommand: '<numberBetween(1,1000)>'
+    createdAt: '<dateTimeBetween("-364 days","-1 days")>'
+    status: '<randomElement($statusArray)>' 
+    totalPrice: '<numberBetween(100,100000)>'
+    user: '@user*'
+    address: '@address*'
+    
