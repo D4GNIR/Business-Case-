@@ -2,14 +2,25 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ApiResource(
+    collectionOperations: ['get','post'],
+    // Pour filtrer les api get et post
+    itemOperations:['get'],
+    normalizationContext:['groups' => ['User_Adress']]
+)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -18,6 +29,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $id;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
+    #[Groups(['User_Adress'])]
     private $email;
 
     #[ORM\Column(type: 'json')]
@@ -27,25 +39,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $password;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['User_Adress'])]
     private $firstName;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['User_Adress'])]
     private $lastName;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['User_Adress'])]
     private $gender;
 
     #[ORM\Column(type: 'datetime')]
+    #[Groups(['User_Adress'])]
     private $dob;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Command::class)]
+    #[Groups(['User_Adress'])]
     private $commands;
 
     #[ORM\ManyToMany(targetEntity: Address::class, inversedBy: 'users')]
+    #[Groups(['User_Adress'])]
     private $adresses;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Review::class)]
+    #[Groups(['User_Adress'])]
     private $reviews;
+
+    #[ORM\Column(type: 'datetime')]
+    private $createdAt;
 
     public function __construct()
     {
@@ -252,6 +274,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $review->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }

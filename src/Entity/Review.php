@@ -2,10 +2,17 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ReviewRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ReviewRepository::class)]
+#[ApiResource(
+    collectionOperations: ['get','post'],
+    // Pour filtrer les api get et post
+    itemOperations:['get']
+)]
 class Review
 {
     #[ORM\Id]
@@ -14,12 +21,44 @@ class Review
     private $id;
 
     #[ORM\Column(type: 'integer')]
+    #[Assert\NotNull(
+        message: 'Votre note ne peux pas etre nul.'
+    ),Assert\NotBlank(
+        message: 'Votre note ne peux pas etre vide.'
+    ),
+    Assert\Positive(
+        message: 'Votre prix total ne peux pas etre négatif.'
+    ),Assert\Type(
+        type: 'integer',
+        message: 'Votre prix total  n\'est pas valide.',
+    ),Assert\Range(
+        min: 1,
+        max: 5,
+        notInRangeMessage: 'Votre note doit etre comprises entre {{ min }} et {{ max }}',
+    )
+    ]
     private $note;
 
     #[ORM\Column(type: 'text', nullable: true)]
+    #[
+        Assert\NotNull(
+        message: 'Votre contenu ne peux pas etre nul.'
+    ),Assert\NotBlank(
+        message: 'Votre contenu ne peux pas etre vide.'
+    ),Assert\Type(
+        type: 'string',
+        message: 'Votre contenu n\'est pas valide.',
+    )
+    ]
     private $content;
 
     #[ORM\Column(type: 'datetime')]
+    #[Assert\EqualTo('today',
+    message: 'Votre date n\'est pas conforme.'
+    ),Assert\Type(
+    type: 'datetime',
+    message: 'Votre date n\'est pas conforme.'
+    )]
     private $createdAt;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'reviews')]

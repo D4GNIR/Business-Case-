@@ -2,12 +2,22 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ProductRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
+#[ApiResource(
+    collectionOperations: ['get','post'],
+    // Pour filtrer les api get et post
+    itemOperations:['get'],
+    normalizationContext:['groups' => ['Product_Category']]
+
+)]
 class Product
 {
     #[ORM\Id]
@@ -16,33 +26,98 @@ class Product
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[
+        Assert\NotNull(
+        message: 'Votre nom de produit ne peux pas etre nul.'
+    ),Assert\NotBlank(
+        message: 'Votre nom de produit ne peux pas etre vide.'
+    ),Assert\Length(        
+        min: 2,
+        max: 43,
+        minMessage: 'Votre nom de produit doit au moins faire {{ limit }} caractères de long.',
+        maxMessage: 'Votre nom de produit doit faire moins de {{ limit }} caractères de long.',)
+    ,Assert\Type(
+        type: 'string',
+        message: 'Votre nom de produit n\'est pas valide.',
+    )
+    ]
+    #[Groups(['Product_Category','Command_Product'])]
     private $label;
 
     #[ORM\Column(type: 'text')]
+    #[
+        Assert\NotNull(
+        message: 'Votre description ne peux pas etre nul.'
+    ),Assert\NotBlank(
+        message: 'Votre description ne peux pas etre vide.'
+    ),Assert\Type(
+        type: 'string',
+        message: 'Votre description n\'est pas valide.',
+    )
+    ]
+    #[Groups(['Product_Category'])]
     private $decription;
 
     #[ORM\Column(type: 'integer')]
+    #[
+        Assert\NotNull(
+        message: 'Votre prix ne peux pas etre nul.'
+    ),Assert\NotBlank(
+        message: 'Votre prix  ne peux pas etre vide.'
+    ),
+    Assert\Positive(
+        message: 'Votre prix  ne peux pas etre négatif.'
+    ),Assert\Type(
+        type: 'integer',
+        message: 'Votre prix  n\'est pas valide.',
+    )
+    ]
+    #[Groups(['Product_Category','Command_Product'])]
     private $price;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[
+    Assert\NotBlank(
+        message: 'Votre stock  ne peux pas etre vide.'
+    ),Assert\Type(
+        type: 'integer',
+        message: 'Votre stock  n\'est pas valide.',
+    )
+    ]
+    #[Groups(['Product_Category'])]
     private $stock;
 
     #[ORM\Column(type: 'boolean')]
+    #[
+        Assert\NotNull(
+            message: 'Votre champ actif ne peux pas etre vide.'
+        ),
+        Assert\Type(
+            type: 'bool',
+            message: 'Votre champ actif n\'est pas valide.',
+        )
+        ]
+        #[Groups(['Product_Category'])]
     private $isActive;
 
     #[ORM\ManyToMany(targetEntity: Command::class, inversedBy: 'products')]
+    #[Groups(['Product_Category'])]
     private $commands;
 
     #[ORM\ManyToOne(targetEntity: Brand::class, inversedBy: 'products')]
+    #[Groups(['Product_Category','Command_Product'])]
     private $brand;
 
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: Review::class)]
+    #[Groups(['Product_Category'])]
     private $reviews;
 
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'products')]
+    #[Groups(['Product_Category'])]
     private $categories;
 
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: ProductPicture::class)]
+    #[Groups(['Product_Category'])]
     private $productPictures;
 
     public function __construct()

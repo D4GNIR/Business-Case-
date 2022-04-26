@@ -12,6 +12,7 @@ App\Entity\User:
     gender: 'O'  
     dob: '<date_create()>'
     adresses: '<numberBetween(1,5)>x @address*'
+    createdAt: '<dateTimeBetween("-800 days","-1 days")>'
   user{1..150}:
     email: '<email()>'
     roles: ["ROLE_USER"]
@@ -22,3 +23,4 @@ App\Entity\User:
     gender: '<randomElement($genderArray)>'  
     dob: '<dateTimeBetween("-29120 days","-5460 days")>'
     adresses: '<numberBetween(1,5)>x @address*'
+    createdAt: '<dateTimeBetween("-800 days","-1 days")>'

@@ -2,12 +2,19 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\BrandRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: BrandRepository::class)]
+#[ApiResource(   
+    collectionOperations: ['get','post'],
+    // Pour filtrer les api get et post
+    itemOperations:['get'])
+    ]
 class Brand
 {
     #[ORM\Id]
@@ -16,6 +23,17 @@ class Brand
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[
+        Assert\NotNull(
+        message: 'Votre label ne peux pas etre nul.'
+    ),Assert\NotBlank(
+        message: 'Votre label ne peux pas etre vide.'
+    ),Assert\Length(        
+        min: 2,
+        max: 20,
+        minMessage: 'Votre label doit au moins faire {{ limit }} caractères de long.',
+        maxMessage: 'Votre label doit faire moins de {{ limit }} caractères de long.',)
+        ]
     private $label;
 
     #[ORM\Column(type: 'string', length: 255)]

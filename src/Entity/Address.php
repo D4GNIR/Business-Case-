@@ -2,12 +2,20 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\AddressRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: AddressRepository::class)]
+#[ApiResource(
+    collectionOperations: ['get','post'],
+    // Pour filtrer les api get et post
+    itemOperations:['get']
+)]
 class Address
 {
     #[ORM\Id]
@@ -16,16 +24,49 @@ class Address
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[
+        Assert\NotNull(
+        message: 'Votre numéro de rue ne peux pas etre nul.'
+    ),Assert\NotBlank(
+        message: 'Votre numéro de rue ne peux pas etre vide.'
+    ),
+    Assert\Positive(
+        message: 'Votre numéro de rue ne peux pas etre négatif.'
+    ),Assert\Type(
+        type: 'string',
+        message: 'Votre numéro de rue n\'est pas valide.',
+    )
+    ]
+    #[Groups(['User_Adress'])]
     private $streetNumber;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[
+        Assert\NotNull(
+        message: 'Votre numéro de rue ne peux pas etre nul.'
+    ),Assert\NotBlank(
+        message: 'Votre numéro de rue ne peux pas etre vide.'
+    ),Assert\Length(        
+        min: 2,
+        max: 43,
+        minMessage: 'Votre nom de rue doit au moins faire {{ limit }} caractères de long.',
+        maxMessage: 'Votre nom de rue doit faire moins de {{ limit }} caractères de long.',)
+        ]
+        #[Groups(['User_Adress'])]
     private $streetName;
-
+    
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'adresses')]
     private $users;
 
     #[ORM\ManyToOne(targetEntity: City::class, inversedBy: 'addresses')]
     #[ORM\JoinColumn(nullable: false)]
+    #[
+        Assert\NotNull(
+        message: 'Votre numéro de rue ne peux pas etre nul.'
+    ),Assert\NotBlank(
+        message: 'Votre numéro de rue ne peux pas etre vide.'
+    )
+    ]
     private $city;
 
     #[ORM\OneToMany(mappedBy: 'address', targetEntity: Command::class)]

@@ -2,12 +2,27 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\CommandRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 #[ORM\Entity(repositoryClass: CommandRepository::class)]
+#[ApiResource(
+    collectionOperations: ['get','post'],
+    // Pour filtrer les api get et post
+    itemOperations:['get'],
+    normalizationContext:['groups' => ['Command_Product']]
+)]
+#[ApiFilter(DateFilter::class, properties: ['createdAt'])]
+#[ApiFilter(SearchFilter::class, properties: ['id' => 'exact', 'user.email' => 'exact'])]
+// http://127.0.0.1:8000/api/commands?email=carson52@hotmail.com
 class Command
 {
     #[ORM\Id]
@@ -16,15 +31,63 @@ class Command
     private $id;
 
     #[ORM\Column(type: 'integer')]
+    #[
+        Assert\NotNull(
+        message: 'Votre numéro de commande ne peux pas etre nul.'
+    ),Assert\NotBlank(
+        message: 'Votre numéro de commande ne peux pas etre vide.'
+    ),
+    Assert\Positive(
+        message: 'Votre numéro de commande ne peux pas etre négatif.'
+    ),Assert\Type(
+        type: 'string',
+        message: 'Votre numéro de commande n\'est pas valide.',
+    )
+    ]
+    #[Groups(['Command_Product'])]
     private $numCommand;
 
     #[ORM\Column(type: 'datetime')]
+    #[Assert\EqualTo('today',
+    message: 'Votre date n\'est pas conforme.'
+    ),Assert\Type(
+    type: 'datetime',
+    message: 'Votre date n\'est pas conforme.'
+    )]
+    #[Groups(['Command_Product'])]
     private $createdAt;
 
     #[ORM\Column(type: 'integer')]
+    #[
+        Assert\NotNull(
+        message: 'Votre status ne peux pas etre nul.'
+    ),Assert\NotBlank(
+        message: 'Votre status ne peux pas etre vide.'
+    ),
+    Assert\Positive(
+        message: 'Votre status ne peux pas etre négatif.'
+    ),Assert\Type(
+        type: 'string',
+        message: 'Votre status n\'est pas valide.',
+    )
+    ]
     private $status;
 
     #[ORM\Column(type: 'integer')]
+    #[
+        Assert\NotNull(
+        message: 'Votre prix total ne peux pas etre nul.'
+    ),Assert\NotBlank(
+        message: 'Votre prix total  ne peux pas etre vide.'
+    ),
+    Assert\Positive(
+        message: 'Votre prix total  ne peux pas etre négatif.'
+    ),Assert\Type(
+        type: 'string',
+        message: 'Votre prix total  n\'est pas valide.',
+    )
+    ]
+    #[Groups(['Command_Product'])]
     private $totalPrice;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'commands')]
@@ -36,6 +99,7 @@ class Command
     private $address;
 
     #[ORM\ManyToMany(targetEntity: Product::class, mappedBy: 'commands')]
+    #[Groups(['Command_Product'])]
     private $products;
 
     public function __construct()
