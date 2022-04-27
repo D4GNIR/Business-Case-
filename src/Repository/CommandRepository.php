@@ -47,6 +47,72 @@ class CommandRepository extends ServiceEntityRepository
         }
     }
 
+    public function findBasketStatus100 ($minDate,$maxDate)
+    {
+        return $this->createQueryBuilder('c')
+        ->where('c.createdAt > :date_min')
+        ->andWhere('c.createdAt < :date_max')
+        ->andWhere('c.status = 100')
+        ->setParameter('date_min',$minDate)
+        ->setParameter('date_max',$maxDate)
+        ->getQuery()->getResult();
+    }
+
+    public function findCommandsBetweenDates ($minDate,$maxDate)
+    {
+        return $this->createQueryBuilder('c')
+        ->where('c.createdAt > :date_min')
+        ->andWhere('c.createdAt < :date_max')
+        ->andWhere('c.status = 200 OR c.status = 300 OR c.status = 400 OR c.status = 500')
+        ->setParameter('date_min',$minDate)
+        ->setParameter('date_max',$maxDate)
+        ->getQuery()->getResult();
+    }
+
+    public function commandsSalesAmount($minDate,$maxDate)
+    {
+        return $this->createQueryBuilder('c')
+        ->where('c.createdAt > :date_min')
+        ->andWhere('c.createdAt < :date_max')
+        ->andWhere('c.status = 200 OR g.status = 300')
+        ->setParameter('date_min',$minDate)
+        ->setParameter('date_max',$maxDate)
+        ->getQuery()->getResult();
+    }
+
+    public function commandsSalesAverage($minDate,$maxDate)
+    {
+        return $this->createQueryBuilder('c')
+        ->where('c.createdAt > :date_min')
+        ->andWhere('c.createdAt < :date_max')
+        ->andWhere('c.status = 200 OR g.status = 300')
+        ->setParameter('date_min',$minDate)
+        ->setParameter('date_max',$maxDate)
+        ->getQuery()->getResult();
+    }
+
+    public function findCommandsByUserCreatedInDates($minDate,$maxDate)
+    {
+        return $this->createQueryBuilder('c')
+        ->innerJoin('c.user', 'u')
+        ->where('u.createdAt > :date_min')
+        ->andWhere('u.createdAt < :date_max')
+        ->andWhere('c.status = 200 OR c.status = 300')
+        ->setParameter('date_min',$minDate)
+        ->setParameter('date_max',$maxDate)
+        ->getQuery()->getResult();
+    }
+
+    public function findCommandsByUserCreatedOutDate($minDate)
+    {
+        return $this->createQueryBuilder('c')
+        ->innerJoin('c.user', 'u')
+        ->where('u.createdAt < :date_min')
+        ->andWhere('c.status = 200 OR c.status = 300')
+        ->setParameter('date_min',$minDate)
+        ->getQuery()->getResult();
+    }
+
     // /**
     //  * @return Command[] Returns an array of Command objects
     //  */

@@ -47,6 +47,16 @@ class VisitedRepository extends ServiceEntityRepository
         }
     }
 
+    public function findVisitBetweenDates ($minDate,$maxDate)
+    {
+        return $this->createQueryBuilder('v')
+        ->where('v.visitedAt > :date_min')
+        ->andWhere('v.visitedAt < :date_max')
+        ->setParameter('date_min',$minDate)
+        ->setParameter('date_max',$maxDate)
+        ->getQuery()->getResult();
+    }
+
     // /**
     //  * @return Visited[] Returns an array of Visited objects
     //  */

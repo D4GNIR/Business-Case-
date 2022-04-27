@@ -12,10 +12,61 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use App\Controller\AbandonnedBasketController;
+use App\Controller\BasketCountController;
+use App\Controller\CommandRecurrenceController;
+use App\Controller\CommandsAverageController;
+use App\Controller\CommandsCountController;
+use App\Controller\CommandsSalesController;
+use App\Controller\ConversionBasketsVisitController;
+use App\Controller\ConversionCommandsBasketsController;
 
 #[ORM\Entity(repositoryClass: CommandRepository::class)]
 #[ApiResource(
-    collectionOperations: ['get','post'],
+    collectionOperations: [
+        'get',
+        'post',
+        'get_basket_count' =>[
+             'method' => 'GET',
+             'path' => '/commands/get_basket_count',
+             'controller' => BasketCountController::class
+        ],
+        'get_commands_count' =>[
+            'method' => 'GET',
+            'path' => '/commands/get_commands_count',
+            'controller' => CommandsCountController::class
+            ],
+        'get_commands_sales' =>[
+            'method' => 'GET',
+            'path' => '/commands/get_commands_sales',
+            'controller' => CommandsSalesController::class
+                ],
+        'get_commands_average' =>[
+            'method' => 'GET',
+            'path' => '/commands/get_commands_average',
+            'controller' => CommandsAverageController::class
+                ],
+        'get_commands_reccurence' =>[
+            'method' => 'GET',
+            'path' => '/commands/get_commands_reccurence',
+            'controller' => CommandRecurrenceController::class
+                ],
+        'get_commands_conversion' =>[
+            'method' => 'GET',
+            'path' => '/commands/get_commands_conversion',
+            'controller' => ConversionCommandsBasketsController::class
+                ],
+        'get_commands_abandonned' =>[
+            'method' => 'GET',
+            'path' => '/commands/get_commands_abandonned',
+            'controller' => AbandonnedBasketController::class
+                ],
+        'get_converted_basket' =>[
+            'method' => 'GET',
+            'path' => '/commands/get_converted_basket',
+            'controller' => ConversionBasketsVisitController::class
+                ]
+        ],
     // Pour filtrer les api get et post
     itemOperations:['get'],
     normalizationContext:['groups' => ['Command_Product']]
