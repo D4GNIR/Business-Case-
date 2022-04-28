@@ -28,6 +28,7 @@ class BasketCountController extends AbstractController
        $maxDate = new DateTime($maxDateString);
 
        $basketEntities = $this->basketRepository->findBasketStatus100($minDate,$maxDate);
+       dump($this->getUser());
        return $this->json(count($basketEntities));
 
    }
