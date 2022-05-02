@@ -33,7 +33,7 @@ class ConversionBasketsVisitController extends AbstractController
        $visitEntities = $this->conversionVisitRepository->findVisitBetweenDates($minDate,$maxDate);
        $basketEntities = $this->conversionBasketsRepository->findBasketStatus100($minDate,$maxDate);
        $result = (count($visitEntities)/count($basketEntities))*100;
-       return $this->json((float)number_format($result,2));
+       return $this->json(['data' => (float)number_format($result,2)]);
 
    }
 }

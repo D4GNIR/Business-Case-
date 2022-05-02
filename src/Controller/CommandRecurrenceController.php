@@ -30,7 +30,7 @@ class CommandRecurrenceController extends AbstractController
         $commandRecurrenceInDates = $this->commandReccurrenceRepository->findCommandsRecurenceByUserCreatedInDates($minDate,$maxDate);
         $commandRecurrenceOutDates = $this->commandReccurrenceRepository->findCommandsRecurenceByUserCreatedOutDate($minDate);
         $result = (count($commandRecurrenceInDates)/count($commandRecurrenceOutDates))*100;
-        return $this->json((float)number_format($result,2));
+        return $this->json(['data' => (float)number_format($result,2)]);
  
     }
 }

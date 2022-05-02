@@ -33,7 +33,7 @@ class CommandsAverageController extends AbstractController
             $total += $commandEntity->getTotalPrice();
             $i++;
         }
-        return $this->json(($total/$i));
+        return $this->json(['data' => ($total/$i)]);
  
     }
 }

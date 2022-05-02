@@ -27,7 +27,7 @@ class VisitCountController extends AbstractController
 
        $visitEntities = $this->visitedRepository->findVisitBetweenDates($minDate,$maxDate);
        dump($visitEntities);
-       return $this->json(count($visitEntities));
+       return $this->json(['data' => count($visitEntities)]);
 
    }
 

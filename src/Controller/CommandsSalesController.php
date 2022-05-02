@@ -33,7 +33,7 @@ class CommandsSalesController extends AbstractController
        foreach ($commandCountEntities as $commandEntity) {
            $total += $commandEntity->getTotalPrice();
        }
-       return $this->json($total);
+       return $this->json(['data' => $total]);
 
    }
 }

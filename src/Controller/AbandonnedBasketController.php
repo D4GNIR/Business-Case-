@@ -30,7 +30,7 @@ class AbandonnedBasketController extends AbstractController
        $basketEntities = $this->abandonnedBasketsRepository->findBasketStatus100($minDate,$maxDate);
        $CommandsEntities = $this->abandonnedBasketsRepository->findCommandsBetweenDates($minDate,$maxDate);
        $result = 100-((count($basketEntities)/count($CommandsEntities))*100);
-       return $this->json((float)number_format($result,2));
+       return $this->json(['data' =>(float)number_format($result,2)]);
 
    }
 }

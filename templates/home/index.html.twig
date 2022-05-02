@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<section class="speech ">
+    <div class="container" style="background-image:url('{{ asset('build/images/earth_background.jpg') }}');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: $white;
+    margin: 0em;
+    padding:1em;
+    padding-bottom: 20em;">
+        <p class="title text-center">AnimalX est une animalerie spécialisé,</p>
+        <p class="title text-center">dans les produits spatiaux pour animaux</p>
+    </div>
+</section>
+
+{% endblock %}

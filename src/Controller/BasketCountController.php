@@ -29,7 +29,7 @@ class BasketCountController extends AbstractController
 
        $basketEntities = $this->basketRepository->findBasketStatus100($minDate,$maxDate);
        dump($this->getUser());
-       return $this->json(count($basketEntities));
+       return $this->json(['data' => count($basketEntities)]);
 
    }
 }

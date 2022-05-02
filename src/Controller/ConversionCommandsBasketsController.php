@@ -30,7 +30,7 @@ class ConversionCommandsBasketsController extends AbstractController
        $basketEntities = $this->conversionCommandsBasketsRepository->findBasketStatus100($minDate,$maxDate);
        $CommandsEntities = $this->conversionCommandsBasketsRepository->findCommandsBetweenDates($minDate,$maxDate);
        $result = (count($basketEntities)/count($CommandsEntities))*100;
-       return $this->json((float)number_format($result,2));
+       return $this->json(['data' => (float)number_format($result,2)]);
 
    }
 }

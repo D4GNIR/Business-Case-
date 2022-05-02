@@ -30,7 +30,7 @@ class NewUserController extends AbstractController
       
         $newUsersEntities = $this->newUserRepository->findNewUsers($minDate,$maxDate);
         
-        return $this->json(count($newUsersEntities));
+        return $this->json(['data' => count($newUsersEntities)]);
  
     }
 }
