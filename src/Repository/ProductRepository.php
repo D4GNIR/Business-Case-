@@ -47,6 +47,20 @@ class ProductRepository extends ServiceEntityRepository
         }
     }
 
+    public function getTotalProductSold($minDate,$maxDate){
+        return $this->createQueryBuilder("p")
+                    ->select('COUNT(command) as totalSales','p.label as product')
+                    ->join('p.commands','command')
+                    ->groupBy('p.label')
+                    ->where('command.createdAt>= :date_min')
+                    ->andWhere('command.createdAt<= :date_max')
+                    ->setParameter('date_min',$minDate)
+                    ->setParameter('date_max',$maxDate)
+                    ->orderBy('COUNT(command)','DESC')
+                    ->getQuery()->getResult();
+
+    }
+
     // /**
     //  * @return Product[] Returns an array of Product objects
     //  */

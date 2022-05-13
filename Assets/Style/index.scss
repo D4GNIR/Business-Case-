@@ -1,18 +1,11 @@
-@import "~bootstrap";
+// Librairies
+@import "libs/bootstrap.scss";
 
-
-$primary : rgb(29, 78, 216);
-
-.Big{
-    font-size: 6em;
-}
-
-a{
-    text-decoration: none;
-}
 
 // My Works
 @import 'component/navbar';
 
+@import 'templates/general';
 @import 'templates/speech';
 @import 'templates/space';
+@import 'templates/goodDeals';

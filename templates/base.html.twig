@@ -16,11 +16,11 @@
     {{ encore_entry_script_tags('script') }}
     {% endblock %}
 </head>
+<body>
 <header class="">
     <div class="container-fluid bg-primary p-2">
         <div class="row">
             <nav class="navbar navbar-expand-lg navbar-dark text-light ">
-
                 <div class="text-center">
                     <a href="/"><img src="{{ asset('build/images/RlogoAnimalXfr.png') }}" class='img-fluid' alt="Logo"></a>
                     <p class="mt-2">Vers l'infini et au delà</p>
@@ -40,19 +40,19 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="#"><img src="{{ asset('build/images/chat_emot_w.png') }}" class='img-fluid emot' alt="Logo"></a>
                             </li>
-                                                        <li class="nav-item">
+                             <li class="nav-item">
                                 <a class="nav-link" href="#"><img src="{{ asset('build/images/oiseau_emot_w.png') }}" class='img-fluid emot' alt="Logo"></a>
                             </li>
-                                                        <li class="nav-item">
+                            <li class="nav-item">
                                 <a class="nav-link" href="#"><img src="{{ asset('build/images/poisson_emot_w.png') }}" class='img-fluid emot' alt="Logo"></a>
                             </li>
-                                                        <li class="nav-item">
-                                <a class="nav-link" href="#"><img src="{{ asset('build/images/rat_emot_w.png') }}" class='img-fluid emot' alt="Logo"></a>
+                             <li class="nav-item">
+                                <a class="nav-link" href="#"><img src="{{ asset('build/images/ratw_emot_w.png') }}" class='img-fluid emot' alt="Logo"></a>
                             </li>
-                                                        <li class="nav-item">
+                            <li class="nav-item">
                                 <a class="nav-link" href="#"><img src="{{ asset('build/images/gecko_emot_w.png') }}" class='img-fluid emot' alt="Logo"></a>
                             </li>
-                                                        <li class="nav-item">
+                            <li class="nav-item">
                                 <a class="nav-link" href="#"><img src="{{ asset('build/images/poule_emot_w.png') }}" class='img-fluid emot' alt="Logo"></a>
                             </li>
                         </ul>
@@ -81,9 +81,17 @@
     </div>
 </header>
 
+<section>
+    {% block body %}{% endblock %}
+</footer>
 
 
-{% block body %}{% endblock %}
+<footer>
+
+</footer>
+
+
+
 </body>
 
 </html>

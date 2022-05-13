@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Controller\TotalProductSoldController;
 use Symfony\Component\Validator\Constraints as Assert;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ProductRepository;
@@ -12,9 +13,14 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 #[ApiResource(
-    collectionOperations: ['get','post'],
+    collectionOperations: ['get','post',
+    'get_total_product' =>[
+         'method' => 'GET',
+         'path' => 'products/get_total_product',
+         'controller' => TotalProductSoldController::class
+    ]],
     // Pour filtrer les api get et post
-    itemOperations:['get'],
+    itemOperations:[],
     normalizationContext:['groups' => ['Product_Category']]
 
 )]

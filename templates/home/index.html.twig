@@ -3,23 +3,154 @@
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
 <section class="speech ">
-    <div class="container" style="background-image:url('{{ asset('build/images/earth_background.jpg') }}');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    color: $white;
-    margin: 0em;
-    padding:1em;
-    padding-bottom: 20em;">
-        <p class="title text-center">AnimalX est une animalerie spécialisé,</p>
-        <p class="title text-center">dans les produits spatiaux pour animaux</p>
-    </div>
+  <div class="container">
+    <p class="title text-center">AnimalX est une animalerie spécialisée,</p>
+    <p class="title text-center">dans les produits spatiaux pour animaux</p>
+  </div>
 </section>
+<section class="space">
+  <div class="container">
+    <div class="row ">
+      <!-- Card 1 -->
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <div class=" ">
+          <img src="{{ asset('build/images/celebrite.png') }}" width="50" class="card-top" alt="celebrity">
+          <div class="card-body p-0">
+            <h5 class="card-title">Celebrité</h5>
+            <p class="card-text">Votre animal va devenir une rockstar.<br>
+              Il obtiendra la reconnaissance de ces paires<br>
+              et des humains</p>
+          </div>
+        </div>
+      </div>
+      <!-- Card 2 -->
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <div class=" ">
+          <img src="{{ asset('build/images/livre-de-science.png') }}" width="50" class="card-top" alt="sciences">
+          <div class="card-body p-0">
+            <h5 class="card-title">Sciences</h5>
+            <p class="card-text">Faites avancer la science en permettant<br>
+              à votre animal de devenir un explorateur.</p>
+          </div>
+        </div>
+      </div>
+      <!-- Card 3 -->
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <div class=" ">
+          <img src="{{ asset('build/images/voyage-dans-lespace.png') }}" width="50" class="card-top" alt="voyage">
+          <div class="card-body p-0">
+            <h5 class="card-title">Voyage</h5>
+            <p class="card-text">Offrez le voyage de ces rêves à votre animal, <br>
+              il vous sera reconnaissant.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{# va surement falloir link une entité #}
+<section class="goodDeals">
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-dark text-primary">
+      <div class="text-center">
+        <h2 class="mt-2"><u>Les bons plans</u></h2>
+      </div>
+      <div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto  mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link text-primary" aria-current="page" href="#">Chien</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-primary" aria-current="page" href="#">Chat</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-primary" aria-current="page" href="#">Oiseau</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-primary" aria-current="page" href="#">Poisson</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-primary" aria-current="page" href="#">Rongeur</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-primary" aria-current="page" href="#">Reptile</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-primary" aria-current="page" href="#">Ferme</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+  </div>
+  </nav>
+  </div>
+  <div class="container">
+    <h2 class="text-primary">Les croquettes du voyageur galactique</h2>
+    <div class="row">
+      <div class="col-lg-6 col-md-12 col-sm-12">
+        <img src="{{ asset('build/images/croquette.png') }}" alt="Croquette 42">
+      </div>
+      <div class="col-lg-6 col-md-12 col-sm-12 text-primary">
+        <h3>Un repas complet pour votre chat,
+          croquette validé par la NASA</h3>
+        <p> <span class="price big">42€</span> <strong class="price">TTC</strong></p>
+        <p>Livraison 24H</p>
+        <a href="#">Voir fiche produit -></a><br>
+        <button class="btn btn-alert mt-3">Acheter</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="space">
+  <div class="container">
+    <div class="row">
+      <h2 class="mt-2"><u>Contacts</u></h2>
+      <div class="col-4">
+        <img src="{{ asset('build/images/RlogoAnimalXfr.png') }}" class='img-fluid mt-3' alt="Logo">
+        <p class="mt-3">SARL Lorem ipsum dolor</p>
+        <p>8 rue de l’église</p>
+        <p>31000 Nîmes</p>
+        <p>Mail : contact@animalx.com</p>
+        <p>Tel : +33 (0)4 85 96 57 82</p>
+      </div>
+      <div class="col-8">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11515.711731111865!2d4.325890727324212!3d43.81585423677714!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12b42c30575a46ab%3A0x940ad5c41d28d889!2s8%20Rue%20de%20l&#39;%C3%89glise%2C%2030900%20N%C3%AEmes!5e0!3m2!1sfr!2sfr!4v1651502779991!5m2!1sfr!2sfr"
+          width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <div>
+      </div>
+</section>
+<footer>
+  <div class="container text-primary text-center">
+    <div class="row">
+      <ul class="d-flex justify-content-around">
+        <li><a href="#">CGV</a></li>
+        <li><a href="#">Conditions de résiliation</a></li>
+        <li><a href="#">Livraisons</a></li>
+        <li><a href="#">Mentions légales</a></li>
+        <li><a href="#">Protections des données</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Make with ❤️ for AnimalX</h3>
+    </div>
+  </div>
+</footer>
 
 {% endblock %}

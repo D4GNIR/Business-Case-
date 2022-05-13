@@ -1,13 +1,19 @@
 .speech{
 
+    background-image: url("../../../public/build/images/earth_background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: $white;
+    padding:1em;
+    padding-bottom: 20em;
+
     :first-child{
         
         box-sizing: border-box;  
         width: 100%; 
         margin-top: 2em;
     }
-
-
 }
 
 .title{

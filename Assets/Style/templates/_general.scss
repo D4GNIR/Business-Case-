@@ -1,0 +1,12 @@
+$primary : rgb(29, 78, 216);
+$alert : #e7001f;
+a{
+    text-decoration: none;
+    :hover{
+        color: $alert;
+    }
+}
+
+li{
+    list-style:none;
+}
