@@ -1,6 +1,6 @@
-{% extends 'base.html.twig' %}
+{% extends 'base-front.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Bienvenue sur AnimalX{% endblock %}
 
 {% block body %}
 <section class="speech ">
@@ -52,66 +52,60 @@
 {# va surement falloir link une entité #}
 <section class="goodDeals">
   <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-dark text-primary">
-      <div class="text-center">
-        <h2 class="mt-2"><u>Les bons plans</u></h2>
+    <h2 class="mt-2 me-1 text-primary"><u>Les bons plans</u></h2>
+    {# carroussel start #}
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+          aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+          aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+          aria-label="Slide 3"></button>
       </div>
-      <div>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="container-fluid">
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-            aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto  mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link text-primary" aria-current="page" href="#">Chien</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-primary" aria-current="page" href="#">Chat</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-primary" aria-current="page" href="#">Oiseau</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-primary" aria-current="page" href="#">Poisson</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-primary" aria-current="page" href="#">Rongeur</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-primary" aria-current="page" href="#">Reptile</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-primary" aria-current="page" href="#">Ferme</a>
-              </li>
-            </ul>
+      <div class="carousel-inner">
+      {% for item in items %}
+        <div class="carousel-item {% if loop.first %} active {% endif %}">
+          <h2 class="text-primary">{{ item.product.label }}</h2>
+          <div class="row">
+            <div class="col-lg-5 col-md-12 col-sm-12">
+              <img src="{{ asset('build/images/croquette.png') }}" alt="{{ item.product.label }}">
+            </div>
+            <div class="col-lg-5 col-md-12 col-sm-12 text-primary">
+              <h3>{{ item.product.decription }}</h3>
+              <p> <span class="price big">{{ item.product.price|transorm_centime }}€</span> <strong
+                  class="price">TTC</strong></p>
+              <p>Livraison 24H</p>
+              <a href="#">Voir fiche produit -></a><br>
+              <button class="btn btn-alert mt-3 mb-5">Acheter</button>
+            </div>
+            <div>
+            {# {% for review in item.product.reviews %}
+
+            {% endfor %} #}
+            </div>
           </div>
         </div>
+        {% endfor %}
+        {# <div class="carousel-item active">
+          <p class="text-dark">hgfdfghjkl</p>
+        </div>
+        <div class="carousel-item">
+          <p class="text-dark">hgfdfghjkl</p>
+        </div> #}
       </div>
-  </div>
-  </nav>
-  </div>
-  <div class="container">
-    <h2 class="text-primary">Les croquettes du voyageur galactique</h2>
-    <div class="row">
-      <div class="col-lg-6 col-md-12 col-sm-12">
-        <img src="{{ asset('build/images/croquette.png') }}" alt="Croquette 42">
-      </div>
-      <div class="col-lg-6 col-md-12 col-sm-12 text-primary">
-        <h3>Un repas complet pour votre chat,
-          croquette validé par la NASA</h3>
-        <p> <span class="price big">42€</span> <strong class="price">TTC</strong></p>
-        <p>Livraison 24H</p>
-        <a href="#">Voir fiche produit -></a><br>
-        <button class="btn btn-alert mt-3">Acheter</button>
-      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
     </div>
+    {# carroussel end #}
   </div>
 </section>
 
@@ -128,29 +122,14 @@
         <p>Tel : +33 (0)4 85 96 57 82</p>
       </div>
       <div class="col-8">
-        <iframe
+        <iframe style="width: 100%"
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11515.711731111865!2d4.325890727324212!3d43.81585423677714!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12b42c30575a46ab%3A0x940ad5c41d28d889!2s8%20Rue%20de%20l&#39;%C3%89glise%2C%2030900%20N%C3%AEmes!5e0!3m2!1sfr!2sfr!4v1651502779991!5m2!1sfr!2sfr"
-          width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+          height="250" style="border:0;" allowfullscreen="" loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
       <div>
       </div>
 </section>
-<footer>
-  <div class="container text-primary text-center">
-    <div class="row">
-      <ul class="d-flex justify-content-around">
-        <li><a href="#">CGV</a></li>
-        <li><a href="#">Conditions de résiliation</a></li>
-        <li><a href="#">Livraisons</a></li>
-        <li><a href="#">Mentions légales</a></li>
-        <li><a href="#">Protections des données</a></li>
-      </ul>
-    </div>
-    <div>
-      <h3>Make with ❤️ for AnimalX</h3>
-    </div>
-  </div>
-</footer>
+
 
 {% endblock %}

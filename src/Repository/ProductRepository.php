@@ -60,6 +60,16 @@ class ProductRepository extends ServiceEntityRepository
                     ->getQuery()->getResult();
 
     }
+    public function getThreeMostSellProduct(){
+        return $this->createQueryBuilder("p")
+                    ->select('COUNT(command) as totalSales','p as product')
+                    ->join('p.commands','command')
+                    ->groupBy('p.label')
+                    ->setMaxResults(3)
+                    ->orderBy('COUNT(command)','DESC')
+                    ->getQuery()->getResult();
+
+    }
 
     // /**
     //  * @return Product[] Returns an array of Product objects

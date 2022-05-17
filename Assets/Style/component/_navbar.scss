@@ -2,9 +2,60 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    @include media-breakpoint-down(lg){
+        flex-direction: column;
+
+        .logo-website{
+            width: 155px;
+            margin-bottom: 1.5rem;
+            margin-top: 1.5rem;
+        }
+    }
+
+    @include media-breakpoint-down(lg){
+        .content-button{
+            width: 100%;
+    
+            ul{
+                display: flex;
+                justify-content: center;
+                flex-direction: row;
+                flex-wrap: wrap;
+    
+                li{
+                    margin-left: 0.5rem;
+                    margin-right: 0.5rem;
+
+                    .emot{
+                        width: 25px;
+                    }
+
+                    i{
+                        font-size: 1.2rem;
+                    }
+                }
+            }
+        }
+    }
+
 }
 
 
 .emot {
     width: 50px;
+}
+
+.nav-mobile{
+    @include media-breakpoint-down(lg){
+        display: none;
+    }
+}
+
+.nav-desk{
+    display: none;
+
+    @include media-breakpoint-down(lg){
+        display: unset;
+    }
 }
