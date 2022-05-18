@@ -122,7 +122,7 @@ class Product
     #[Groups(['Product_Category'])]
     private $categories;
 
-    #[ORM\OneToMany(mappedBy: 'product', targetEntity: ProductPicture::class)]
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: ProductPicture::class, cascade:['persist','remove'])]
     #[Groups(['Product_Category'])]
     private $productPictures;
 

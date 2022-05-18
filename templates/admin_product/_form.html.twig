@@ -1,0 +1,32 @@
+
+<div class="my-3">
+{{ form_start(form) }}
+    <div class="row">
+        <div class="col-6">
+            {{ form_row(form.label) }}
+        </div>
+        <div class="col-6">
+            {{ form_row(form.price) }}
+        </div>
+        <div class="col-12">
+            {{ form_row(form.decription) }}
+        </div>
+        <div class="col-6">
+            {{ form_row(form.stock) }}
+        </div>
+        <div class="col-6">
+            {{ form_row(form.isActive) }}
+        </div>
+        <div class="col-12">
+            {{ form_row(form.brand) }}
+        </div>
+        <div class="col-12 ">
+            {{ form_row(form.categories) }}
+        </div>
+        <div class="col-6">
+            {{ form_row(form.image) }}
+        </div>
+    </div>
+</div>
+<button class="btn btn-warning col-4">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

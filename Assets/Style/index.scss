@@ -3,8 +3,13 @@
 
 
 // My Works
-@import 'component/navbar';
+@import 'variable';
 
+@import 'component/navbar';
+@import 'component/checkbox';
+@import 'component/pagination';
+
+@import 'templates/admin';
 @import 'templates/general';
 @import 'templates/speech';
 @import 'templates/space';
@@ -12,7 +17,6 @@
 
 
 
-//Variable
 
 
 

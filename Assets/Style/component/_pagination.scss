@@ -1,0 +1,24 @@
+// Commun
+.pagination{
+    font-size: 20px;
+    color: $blueNight;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    span {
+        margin-left: 5px;
+        margin-right: 5px;
+        border-radius: 20%;
+        padding: 0.3rem;
+        background-color: white;
+    }
+
+    a{
+        color: $orange;
+        text-decoration: none;
+        &:hover{
+            cursor: pointer;
+        }
+    }
+}

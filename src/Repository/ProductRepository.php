@@ -71,6 +71,12 @@ class ProductRepository extends ServiceEntityRepository
 
     }
 
+    public function getQbAll()
+    {
+        return $this->createQueryBuilder('p')
+        ->orderBy('p.id','asc');
+    }
+
     // /**
     //  * @return Product[] Returns an array of Product objects
     //  */

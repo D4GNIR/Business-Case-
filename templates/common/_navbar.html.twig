@@ -59,6 +59,14 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ path('app_logout')}}"><i class="fa-solid fa-arrow-right-to-bracket fa-2xl"></i></a>
                             </li>
+                            {% if is_granted("ROLE_ADMIN") %}
+                            <li class="nav-item">
+                                <a href="{{ path('app_admin') }}" class="btn btn-danger ms-2"><i class="fa-solid fa-chart-pie"></i></a>
+                            </li>
+                            {% endif %}
+                            <li class="nav-item">
+                                <a href="{{ path('app_register') }}" class="btn btn-danger ms-2">Inscription</a>
+                            </li>
                         </ul>
                     </div>
                         <form class="d-flex">

@@ -1,9 +1,17 @@
 {% extends "base.html.twig" %}
 
-{% block content %}
 
-{% block body %}
-{% endblock %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        {% include 'common/_sidebar.html.twig' %}
+        <div class="col py-3 bg-admin text-light">
+            {% block body %}
+            {% endblock %}
+        </div>
+    </div>
+</div>
+
 
 
 {% endblock %}
