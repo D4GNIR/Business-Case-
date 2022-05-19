@@ -65,13 +65,13 @@
       </div>
       <div class="carousel-inner">
       {% for item in items %}
-      <pre>
-      </pre>
         <div class="carousel-item {% if loop.first %} active {% endif %}">
           <h2 class="text-primary">{{ item.product.label }}</h2>
           <div class="row">
             <div class="col-lg-5 col-md-12 col-sm-12">
-              <img src="{{ asset('build/images/croquette.png') }}" alt="{{ item.product.label }}">
+                {% for image in item.product.productPictures  %}
+                  <img src="{{ asset("uploads/products/"~image.path) }}" class="img-fluid" alt="">
+                {% endfor %}
             </div>
             <div class="col-lg-5 col-md-12 col-sm-12 text-primary">
               <h3>{{ item.product.decription }}</h3>
@@ -79,7 +79,7 @@
                   class="price">TTC</strong></p>
               <p>Livraison 24H</p>
               <a href="#">Voir fiche produit -></a><br>
-              <button class="btn btn-alert mt-3 mb-5">Acheter</button>
+              <a href="{{ path('app_buy', {'id':item.product.id}) }}"class="btn btn-alert mt-3 mb-5">Acheter</a>
             </div>
             <div>
             {# {% for review in item.product.reviews %}

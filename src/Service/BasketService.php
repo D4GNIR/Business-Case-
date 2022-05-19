@@ -26,30 +26,28 @@ class BasketService {
 
     
 
-    public function getBasket($user) : Command{
+    public function getBasket($user){
 
         $basketEntity = $this->commandRepository->getBasketByUser($user);
 
         if($basketEntity === null){
             $basketEntity = new Command();
             $basketEntity->setCreatedAt(new DateTime('now'));
+            $basketEntity->setNumCommand(uniqid());
             $basketEntity->setStatus(EnumCommand::BASKET_BASE);
             $basketEntity->setUser($user);
             $this->em->persist($basketEntity);
             $this->em->flush();
-            return $basketEntity;
-
-        } else {
-
-            return $basketEntity;
-
+            
         } 
+        return $basketEntity;
     }
 
     public function addProductToBasket($user,$productEntity) : void{
         
         $basketEntity = $this->getBasket($user);
-        $basketEntity->addProduct($this->$productEntity);
+        $basketEntity->addProduct($productEntity);
+        
         $this->em->persist($basketEntity);
         $this->em->flush();
     }
@@ -57,8 +55,8 @@ class BasketService {
     public function removeProductFromBasket($user,$productEntity) : void{
         
         $basketEntity = $this->getBasket($user);
-        $basketEntity->removeProduct($this->$productEntity);
-        $this->em->persist($basketEntity);
+        $basketEntity->removeProduct($productEntity);
+        $this->em->remove($basketEntity);
         $this->em->flush();
     }
     

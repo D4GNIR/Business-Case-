@@ -1,0 +1,87 @@
+{% extends 'base-admin.html.twig' %}
+
+{% block title %}Admin Command{% endblock %}
+
+{% block body %}
+<div class="container">
+<a href="{{path('app_command_create')}}" class="btn btn-light m-3">Créer une commande</a>
+    <table class="table table-hover text-light table-dark">
+        <tr class="row">
+            <td class="col-lg-2"><b>numCommand</b></td>
+            <td class="col-lg-2"><b>createdAt</b></td>
+            <td class="col-lg-2"><b>user</b></td>
+            <td class="col-lg-1"><b>status</b></td>
+            <td class="col-lg-1"><b>totalPrice</b></td>
+            <td class="col-lg-1"><b>Nombre de Produits</b></td>
+            <td class="col-lg-3"><b>Actions</b></td>
+        </tr>
+        {% for command in pagination %}
+        <tr class="row">
+            <td class="col-lg-2">
+                <p class="">
+                    {{ command.numCommand }}
+                </p>
+            </td>
+            <td class="col-lg-2">
+                <p class="">
+                    {{ command.createdAt|date("d/m/Y") }} 
+                </p>
+            </td>
+            <td class="col-lg-2">
+                <p class="">
+                    {{ command.user.firstName }}
+                    {{ command.user.lastName }}
+                </p>
+            </td>
+            <td class="col-lg-1">
+                <p class="">
+                    {{ command.status }}
+                </p>
+            </td>
+            <td class="col-lg-1">
+                <p class="">
+                    {{ command.totalPrice|transorm_centime }} €
+                </p>
+            </td>
+            <td class="col-lg-1">
+                <p class="">
+                    {{ command.products|length }}
+                </p>
+            </td>
+            <td class="col-lg-3">
+                <a class="btn btn-primary" href="{{ path('app_command_show', {'id': command.id}) }}">
+                    <i class="fa-solid fa-eye"></i>
+                </a>
+                <a class="btn btn-warning" href="{{ path('app_command_edit', {'id': command.id}) }}">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </a>
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#Modal{{ command.id }}">
+                    <i class="fa-solid fa-trash-can"></i>
+                </button>
+            </td>
+        </tr>
+        <!-- Modal -->
+        <div class="modal fade" id="Modal{{ command.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header bg-dark">
+                        <h5 class="modal-title" id="exampleModalLabel">Attention</h5>
+                    </div>
+                    <div class="modal-body bg-dark">
+                        Etes vous sur de vouloir supprimer {{ command.numCommand }} ?
+                    </div>
+                    <div class="modal-footer bg-dark">
+                        <a type="button" class="btn btn-danger" href="{{ path('app_command_delete', {'id': command.id}) }}">Oui</a>
+                        <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Non</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </table>
+
+    <div>
+        {{ knp_pagination_render(pagination) }}
+    </div>
+</div>
+{% endblock %}

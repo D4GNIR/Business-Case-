@@ -6,6 +6,7 @@ use App\Repository\CategoryRepository;
 use App\Repository\ProductRepository;
 use App\Service\BasketService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -60,6 +61,24 @@ class HomeController extends AbstractController
         return $this->render('home/basket.html.twig', [
             'basket' => $basketEntity,
         ]);
+    }
+
+    #[Route('/buy/{id}', name: 'app_buy')]
+    public function buy($id,Request $request)
+    {
+        $productEntity = $this->productRepository->find($id);
+        $basketEntity = $this->basketService->addProductToBasket($this->getUser(),$productEntity);
+
+        return $this->redirectToRoute('app_basket');
+    }
+
+    #[Route('/delete/{id}', name: 'app_del')]
+    public function delete($id,Request $request)
+    {
+        $productEntity = $this->productRepository->find($id);
+        $basketEntity = $this->basketService->removeProductFromBasket($this->getUser(),$productEntity);
+
+        return $this->redirectToRoute('app_basket');
     }
 
     #[Route('/erreur', name: 'app_error')]

@@ -52,8 +52,6 @@ class Product1Type extends AbstractType
             ->add('brand',EntityType::class, [
                 'class' => Brand::class,
                 'choice_label' => 'label',
-                'mapped' => false,
-                'multiple' => false,
                 'expanded' => true,
                 'attr'=>[
                     'class' => 'checkbox_content form-check'
@@ -66,7 +64,6 @@ class Product1Type extends AbstractType
                     return $er->createQueryBuilder('C')
                         ->where('C.categoryParent IS NOT NULL');
                 },
-                'mapped' => false,
                 'multiple' => true,
                 'expanded' => true,
                 'attr'=>[

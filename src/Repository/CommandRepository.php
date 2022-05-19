@@ -122,8 +122,16 @@ class CommandRepository extends ServiceEntityRepository
         ->where('u = :user')
         ->andwhere('c.status = 100')
         ->setParameter('user',$user)
-        ->getQuery()->getResult();
+        ->setMaxResults(1)
+        ->getQuery()->getOneOrNullResult();
     }
+
+    public function getQbAll()
+    {
+        return $this->createQueryBuilder('c');
+
+    }
+
 
 
     // /**

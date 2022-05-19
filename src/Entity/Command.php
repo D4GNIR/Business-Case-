@@ -81,30 +81,11 @@ class Command
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'integer')]
-    #[
-        Assert\NotNull(
-        message: 'Votre numéro de commande ne peux pas etre nul.'
-    ),Assert\NotBlank(
-        message: 'Votre numéro de commande ne peux pas etre vide.'
-    ),
-    Assert\Positive(
-        message: 'Votre numéro de commande ne peux pas etre négatif.'
-    ),Assert\Type(
-        type: 'string',
-        message: 'Votre numéro de commande n\'est pas valide.',
-    )
-    ]
+    #[ORM\Column(type: 'string')]
     #[Groups(['Command_Product'])]
     private $numCommand;
 
     #[ORM\Column(type: 'datetime')]
-    #[Assert\EqualTo('today',
-    message: 'Votre date n\'est pas conforme.'
-    ),Assert\Type(
-    type: 'datetime',
-    message: 'Votre date n\'est pas conforme.'
-    )]
     #[Groups(['Command_Product'])]
     private $createdAt;
 
@@ -117,27 +98,11 @@ class Command
     ),
     Assert\Positive(
         message: 'Votre status ne peux pas etre négatif.'
-    ),Assert\Type(
-        type: 'string',
-        message: 'Votre status n\'est pas valide.',
     )
     ]
     private $status;
 
     #[ORM\Column(type: 'integer')]
-    #[
-        Assert\NotNull(
-        message: 'Votre prix total ne peux pas etre nul.'
-    ),Assert\NotBlank(
-        message: 'Votre prix total  ne peux pas etre vide.'
-    ),
-    Assert\Positive(
-        message: 'Votre prix total  ne peux pas etre négatif.'
-    ),Assert\Type(
-        type: 'string',
-        message: 'Votre prix total  n\'est pas valide.',
-    )
-    ]
     #[Groups(['Command_Product'])]
     private $totalPrice = 0;
 
@@ -146,7 +111,7 @@ class Command
     private $user;
 
     #[ORM\ManyToOne(targetEntity: Address::class, inversedBy: 'commands')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private $address;
 
     #[ORM\ManyToMany(targetEntity: Product::class, mappedBy: 'commands')]
@@ -163,12 +128,12 @@ class Command
         return $this->id;
     }
 
-    public function getNumCommand(): ?int
+    public function getNumCommand(): ?string
     {
         return $this->numCommand;
     }
 
-    public function setNumCommand(int $numCommand): self
+    public function setNumCommand(string $numCommand): self
     {
         $this->numCommand = $numCommand;
 

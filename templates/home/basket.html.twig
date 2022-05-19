@@ -4,8 +4,15 @@
 
 {% block body %}
 
-    <pre>
-        {{ dump(basket) }}
-    </pre>
+
+
+    {% for product in basket.products %}
+        <p>{{ product.label }}</p>
+         <a href="{{ path('app_del', {'id':product.id}) }}"class="btn btn-alert mt-3 mb-5">Supprimer du panier</a>
+        {% for image in product.productPictures  %}
+            <img src="{{ asset("uploads/products/"~image.path) }}" class="img-fluid" alt="">
+        {% endfor %}
+        
+    {% endfor %}
 
 {% endblock %}
