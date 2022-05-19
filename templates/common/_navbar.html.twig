@@ -44,29 +44,30 @@
                             </li>
                         </ul>
                         <ul class="navbar-nav">
+                        {# Page contact #}
                             <li class="nav-item">
                                 <a class="nav-link" href="#"><i class="fa-solid fa-envelope-circle-check fa-2xl"></i></a>
                             </li>
+                            {% if app.user %}
                             <li class="nav-item">
-                                <a class="nav-link" href="#"><i class="fa-solid fa-piggy-bank fa-2xl"></i></i></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#"><i class="fa-solid fa-basket-shopping fa-2xl"></i></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ path('app_login')}}"><i class="fa-solid fa-user fa-2xl"></i></a>
+                                <a class="nav-link" href="{{ path('app_basket') }}"><i class="fa-solid fa-basket-shopping fa-2xl"></i></a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ path('app_logout')}}"><i class="fa-solid fa-arrow-right-to-bracket fa-2xl"></i></a>
                             </li>
+                            {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('app_login')}}"><i class="fa-solid fa-user fa-2xl"></i></a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ path('app_register') }}" class="btn btn-danger ms-2">Inscription</a>
+                            </li>
+                            {% endif %} 
                             {% if is_granted("ROLE_ADMIN") %}
                             <li class="nav-item">
                                 <a href="{{ path('app_admin') }}" class="btn btn-danger ms-2"><i class="fa-solid fa-chart-pie"></i></a>
                             </li>
                             {% endif %}
-                            <li class="nav-item">
-                                <a href="{{ path('app_register') }}" class="btn btn-danger ms-2">Inscription</a>
-                            </li>
                         </ul>
                     </div>
                         <form class="d-flex">

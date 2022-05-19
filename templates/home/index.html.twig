@@ -3,8 +3,8 @@
 {% block title %}Bienvenue sur AnimalX{% endblock %}
 
 {% block body %}
-<section class="speech ">
-  <div class="container">
+<section class="speech " style="background-image: url('build/images/earth_background.jpg');">
+  <div class="container" >
     <p class="title text-center">AnimalX est une animalerie spécialisée,</p>
     <p class="title text-center">dans les produits spatiaux pour animaux</p>
   </div>
@@ -65,6 +65,8 @@
       </div>
       <div class="carousel-inner">
       {% for item in items %}
+      <pre>
+      </pre>
         <div class="carousel-item {% if loop.first %} active {% endif %}">
           <h2 class="text-primary">{{ item.product.label }}</h2>
           <div class="row">

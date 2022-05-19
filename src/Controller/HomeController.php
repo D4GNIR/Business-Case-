@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\CategoryRepository;
 use App\Repository\ProductRepository;
+use App\Service\BasketService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,15 +14,18 @@ class HomeController extends AbstractController
 
     private CategoryRepository $categoryRepository;
     private ProductRepository $productRepository;
+    private BasketService $basketService;
 
 
     public function __construct(
         CategoryRepository $categoryRepository,
-        ProductRepository $productRepository
+        ProductRepository $productRepository,
+        BasketService $basketService
   
     ) {
         $this->categoryRepository = $categoryRepository;
         $this->productRepository = $productRepository;
+        $this->basketService = $basketService;
     }
 
     #[Route('/', name: 'app_home')]
@@ -29,6 +33,7 @@ class HomeController extends AbstractController
     {
         $categoriesEntity = $this->categoryRepository->findAll();
         $topThree = $this->productRepository->getThreeMostSellProduct();
+        
         return $this->render('home/index.html.twig', [
             'categoriesEntity' => $categoriesEntity,
             'items' => $topThree,
@@ -43,6 +48,27 @@ class HomeController extends AbstractController
 
         return $this->render('animal_page/index.html.twig', [
             'category' => $categoryEntity,
+        ]);
+    }
+
+    #[Route('/panier', name: 'app_basket')]
+    public function basket(): Response
+    {
+        
+        $basketEntity = $this->basketService->getBasket($this->getUser());
+
+        return $this->render('home/basket.html.twig', [
+            'basket' => $basketEntity,
+        ]);
+    }
+
+    #[Route('/erreur', name: 'app_error')]
+    public function error(): Response
+    {
+
+        
+        return $this->render('error/error404.html.twig', [
+
         ]);
     }
 }

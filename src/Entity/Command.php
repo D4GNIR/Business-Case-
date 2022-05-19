@@ -139,7 +139,7 @@ class Command
     )
     ]
     #[Groups(['Command_Product'])]
-    private $totalPrice;
+    private $totalPrice = 0;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'commands')]
     #[ORM\JoinColumn(nullable: false)]
